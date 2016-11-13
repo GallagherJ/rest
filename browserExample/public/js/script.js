@@ -5,6 +5,9 @@ var socket = io.connect('http://localhost:8080/');
 var peripheralsList = [];
 
 
+
+
+
 //when connect
 socket.on('connect', function() {
 	console.log("Connected");
@@ -18,6 +21,23 @@ socket.on('peripheral', function(data) {
 		typeof data.name ===  'undefined') {
 		return;
 	}
+
+	// socket.on('left', function(data) {
+
+	// if (typeof data.name ===  undefined ||
+	// 	typeof data.name ===  'undefined') {
+	// 	console.log('left');
+	// 	return;
+	// }
+
+	// socket.on('right', function(data) {
+
+	// if (typeof data.name ===  undefined ||
+	// 	typeof data.name ===  'undefined') {
+	// 	console.log('right');
+	// 	return;
+
+	// }
 
     
 	document.getElementById('found').innerHTML ="Your Word is here!!";
@@ -100,6 +120,22 @@ socket.on('dataLogged', function(data){
 
  });
 
+socket.on('left', function(data){
+
+	document.getElementById('explore').innerHTML = data;
+        console.log(data);
+
+
+ });
+
+socket.on('right', function(data){
+
+	document.getElementById('explore').innerHTML = data;
+        console.log(data);
+
+
+ });
+
 
 function explore(){
 	var Pdiv = this;
@@ -155,5 +191,11 @@ function requestScan(){
 
 var init = function(){	
 	document.getElementById('scan').addEventListener("click", requestScan);
+	//connectAndSetUpMe();
 }
+
+
+
+
+
 
