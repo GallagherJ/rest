@@ -59,3 +59,54 @@ body{
 	padding-top: 10px;
 
 }
+
+
+
+
+/*---word-----*/
+
+#left{ /*out*/
+	float:left;
+    width:200px;
+    height:500px;
+    background:#6600ff; 
+               }
+
+#right{ /*out*/
+	float:right;
+    width:200px;
+    height:500px;
+    background:#0099ff; 
+
+        }
+
+
+
+#newWord{ /*IN*/
+	border-radius: 5px;
+            border-style: solid;
+            border-color: #000;
+            border-width: 2px;
+            display:block;
+            overflow:auto;
+            background-color: #ff0099;
+            font-family: 'Arial';
+            font-size : 30 ;
+            color: #fff;
+            text-align: center;                
+            }
+
+#newWord2{ /*IN*/
+	border-radius: 5px;
+            border-style: solid;
+            border-color: #000;
+            border-width: 2px;
+            display:block;
+            overflow:auto;
+            background-color: #ffff33;
+            font-family: 'Arial';
+            font-size : 30 ;
+            color: #000; 
+            text-align: center;
+                      
+            }

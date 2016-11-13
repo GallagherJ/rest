@@ -14,7 +14,7 @@
 var s1= 'e015cf256310440098b0ca3f203bbcc0'
 var s2= 'ddb67c0dd8ef4d60a99dd4c55047dc90'
 var s3= 'c6e91981c4d14247b34c32c0c64ebf10'
-var s4= 'c4c9d25e40aa42c8bd1b61262fab7de4'
+var s4= 'c5da621e82a84ef09d5053eb03c37590'
 var s5= '2f3ba1a8ff2547728e2c92b71e8d8103'
 
 
@@ -215,77 +215,284 @@ SensorTag.discoverById(s3, onDiscover3);
 SensorTag.discoverById(s4, onDiscover4);
 SensorTag.discoverById(s5, onDiscover5);
 
-function onDiscover1(sensorTag) {
-  console.log('discovered: ' + sensorTag.id + ', type = ' + sensorTag.type);
+function onDiscover1(tag) {
+  console.log('discovered: ' + tag.id + ', type = ' + tag.type);
+ // when you disconnect from a tag, exit the program:
+ tag.on('disconnect', function() {
+     console.log('disconnected!');
+     process.exit(0);
+ });
+
+ function connectAndSetUpMe() {          // attempt to connect to the tag
+     console.log('connectAndSetUp');
+     tag.connectAndSetUp(enableAccelMe);     // when you connect and device is setup, call enableAccelMe
+   }
+
+   function enableAccelMe() {        // attempt to enable the accelerometer
+     console.log('enableAccelerometer');
+     // when you enable the accelerometer, start accelerometer notifications:
+     tag.enableAccelerometer(notifyMe);
+   }
+
+ function notifyMe() {
+     tag.notifyAccelerometer(listenForAcc);      // start the accelerometer listener
+     tag.notifySimpleKey(listenForButton);       // start the button listener
+   }
+
+   // When you get an accelermeter change, print it out:
+ function listenForAcc() {
+     tag.on('accelerometerChange', function(x, y, z) {
+      // console.log('\tx = %d G', x.toFixed(1));
+      // console.log('\ty = %d G', y.toFixed(1));
+      // console.log('\tz = %d G', z.toFixed(1));
+    });
+ }
+
+ // when you get a button change, print it out:
+ function listenForButton() {
+     tag.on('simpleKeyChange', function(left, right) {
+         if (left) {
+             console.log('left1: ' + left);
+             io.sockets.emit('left1', 'left1');
+         }
+         if (right) {
+             console.log('right1: ' + right);
+             io.sockets.emit('right1', 'right1');
+         }
+         // if both buttons are pressed, disconnect:
+         // if (left && right) {
+         //  tag.disconnect();
+         // }
+    });
+ }
+
+ // Now that you've defined all the functions, start the process:
+ connectAndSetUpMe();
+
+
+
 }
 
-function onDiscover2(sensorTag) {
-  console.log('discovered: ' + sensorTag.id + ', type = ' + sensorTag.type);
+function onDiscover2(tag) {
+  console.log('discovered: ' + tag.id + ', type = ' + tag.type);
+   console.log('discovered: ' + tag.id + ', type = ' + tag.type);
+ // when you disconnect from a tag, exit the program:
+ tag.on('disconnect', function() {
+     console.log('disconnected!');
+     process.exit(0);
+ });
+
+ function connectAndSetUpMe() {          // attempt to connect to the tag
+     console.log('connectAndSetUp');
+     tag.connectAndSetUp(enableAccelMe);     // when you connect and device is setup, call enableAccelMe
+   }
+
+   function enableAccelMe() {        // attempt to enable the accelerometer
+     console.log('enableAccelerometer');
+     // when you enable the accelerometer, start accelerometer notifications:
+     tag.enableAccelerometer(notifyMe);
+   }
+
+ function notifyMe() {
+     tag.notifyAccelerometer(listenForAcc);      // start the accelerometer listener
+     tag.notifySimpleKey(listenForButton);       // start the button listener
+   }
+
+   // When you get an accelermeter change, print it out:
+ function listenForAcc() {
+     tag.on('accelerometerChange', function(x, y, z) {
+      // console.log('\tx = %d G', x.toFixed(1));
+      // console.log('\ty = %d G', y.toFixed(1));
+      // console.log('\tz = %d G', z.toFixed(1));
+    });
+ }
+
+ // when you get a button change, print it out:
+ function listenForButton() {
+     tag.on('simpleKeyChange', function(left, right) {
+         if (left) {
+             console.log('left2: ' + left);
+             io.sockets.emit('left2', 'left2');
+         }
+         if (right) {
+             console.log('right2: ' + right);
+             io.sockets.emit('right2', 'right2');
+         }
+         // if both buttons are pressed, disconnect:
+         // if (left && right) {
+         //  tag.disconnect();
+         // }
+    });
+ }
+
+ // Now that you've defined all the functions, start the process:
+ connectAndSetUpMe();
+
+
 }
 
-function onDiscover3(sensorTag) {
-  console.log('discovered: ' + sensorTag.id + ', type = ' + sensorTag.type);
+function onDiscover3(tag) {
+  console.log('discovered: ' + tag.id + ', type = ' + tag.type);
+  tag.on('disconnect', function() {
+     console.log('disconnected!');
+     process.exit(0);
+ });
+
+ function connectAndSetUpMe() {          // attempt to connect to the tag
+     console.log('connectAndSetUp');
+     tag.connectAndSetUp(enableAccelMe);     // when you connect and device is setup, call enableAccelMe
+   }
+
+   function enableAccelMe() {        // attempt to enable the accelerometer
+     console.log('enableAccelerometer');
+     // when you enable the accelerometer, start accelerometer notifications:
+     tag.enableAccelerometer(notifyMe);
+   }
+
+ function notifyMe() {
+     tag.notifyAccelerometer(listenForAcc);      // start the accelerometer listener
+     tag.notifySimpleKey(listenForButton);       // start the button listener
+   }
+
+   // When you get an accelermeter change, print it out:
+ function listenForAcc() {
+     tag.on('accelerometerChange', function(x, y, z) {
+      // console.log('\tx = %d G', x.toFixed(1));
+      // console.log('\ty = %d G', y.toFixed(1));
+      // console.log('\tz = %d G', z.toFixed(1));
+    });
+ }
+
+ // when you get a button change, print it out:
+ function listenForButton() {
+     tag.on('simpleKeyChange', function(left, right) {
+         if (left) {
+             console.log('left3: ' + left);
+             io.sockets.emit('left3', 'left3');
+         }
+         if (right) {
+             console.log('right3: ' + right);
+             io.sockets.emit('right3', 'right3');
+         }
+         // if both buttons are pressed, disconnect:
+         // if (left && right) {
+         //  tag.disconnect();
+         // }
+    });
+ }
+
+ // Now that you've defined all the functions, start the process:
+ connectAndSetUpMe();
+
 }
 
-function onDiscover4(sensorTag) {
-  console.log('discovered: ' + sensorTag.id + ', type = ' + sensorTag.type);
+function onDiscover4(tag) {
+  console.log('discovered: ' + tag.id + ', type = ' + tag.type);
+  tag.on('disconnect', function() {
+     console.log('disconnected!');
+     process.exit(0);
+ });
+
+ function connectAndSetUpMe() {          // attempt to connect to the tag
+     console.log('connectAndSetUp');
+     tag.connectAndSetUp(enableAccelMe);     // when you connect and device is setup, call enableAccelMe
+   }
+
+   function enableAccelMe() {        // attempt to enable the accelerometer
+     console.log('enableAccelerometer');
+     // when you enable the accelerometer, start accelerometer notifications:
+     tag.enableAccelerometer(notifyMe);
+   }
+
+ function notifyMe() {
+     tag.notifyAccelerometer(listenForAcc);      // start the accelerometer listener
+     tag.notifySimpleKey(listenForButton);       // start the button listener
+   }
+
+   // When you get an accelermeter change, print it out:
+ function listenForAcc() {
+     tag.on('accelerometerChange', function(x, y, z) {
+      // console.log('\tx = %d G', x.toFixed(1));
+      // console.log('\ty = %d G', y.toFixed(1));
+      // console.log('\tz = %d G', z.toFixed(1));
+    });
+ }
+
+ // when you get a button change, print it out:
+ function listenForButton() {
+     tag.on('simpleKeyChange', function(left, right) {
+         if (left) {
+             console.log('left4: ' + left);
+             io.sockets.emit('left4', 'left4');
+         };
+         if (right) {
+             console.log('right4: ' + right);
+             io.sockets.emit('right4', 'right4');
+         };
+         // if both buttons are pressed, disconnect:
+         // if (left && right) {
+         //  tag.disconnect();
+         // }
+    });
+ }
+
+ // Now that you've defined all the functions, start the process:
+ connectAndSetUpMe();
+
 }
 
-function onDiscover5(sensorTag) {
-  console.log('discovered: ' + sensorTag.id + ', type = ' + sensorTag.type);
+function onDiscover5(tag) {
+  console.log('discovered: ' + tag.id + ', type = ' + tag.type);
+  tag.on('disconnect', function() {
+     console.log('disconnected!');
+     process.exit(0);
+ });
+
+ function connectAndSetUpMe() {          // attempt to connect to the tag
+     console.log('connectAndSetUp');
+     tag.connectAndSetUp(enableAccelMe);     // when you connect and device is setup, call enableAccelMe
+   }
+
+   function enableAccelMe() {        // attempt to enable the accelerometer
+     console.log('enableAccelerometer');
+     // when you enable the accelerometer, start accelerometer notifications:
+     tag.enableAccelerometer(notifyMe);
+   }
+
+ function notifyMe() {
+     tag.notifyAccelerometer(listenForAcc);      // start the accelerometer listener
+     tag.notifySimpleKey(listenForButton);       // start the button listener
+   }
+
+   // When you get an accelermeter change, print it out:
+ function listenForAcc() {
+     tag.on('accelerometerChange', function(x, y, z) {
+      // console.log('\tx = %d G', x.toFixed(1));
+      // console.log('\ty = %d G', y.toFixed(1));
+      // console.log('\tz = %d G', z.toFixed(1));
+    });
+ }
+
+ // when you get a button change, print it out:
+ function listenForButton() {
+     tag.on('simpleKeyChange', function(left, right) {
+         if (left) {
+             console.log('left5: ' + left);
+             io.sockets.emit('left5', 'left5');
+         }
+         if (right) {
+             console.log('right5: ' + right);
+             io.sockets.emit('right5', 'right5');
+         }
+         // if both buttons are pressed, disconnect:
+         // if (left && right) {
+         //  tag.disconnect();
+         // }
+    });
+ }
+
+ // Now that you've defined all the functions, start the process:
+ connectAndSetUpMe();
+
 }
-
-// SensorTag.discoverAll(function(tag) {
-// 	// when you disconnect from a tag, exit the program:
-// 	tag.on('disconnect', function() {
-// 		console.log('disconnected!');
-// 		process.exit(0);
-// 	});
-
-// 	function connectAndSetUpMe() {			// attempt to connect to the tag
-//      console.log('connectAndSetUp');
-//      tag.connectAndSetUp(enableAccelMe);		// when you connect and device is setup, call enableAccelMe
-//    }
-
-//    function enableAccelMe() {		// attempt to enable the accelerometer
-//      console.log('enableAccelerometer');
-//      // when you enable the accelerometer, start accelerometer notifications:
-//      tag.enableAccelerometer(notifyMe);
-//    }
-
-// 	function notifyMe() {
-//    	tag.notifyAccelerometer(listenForAcc);   	// start the accelerometer listener
-// 		tag.notifySimpleKey(listenForButton);		// start the button listener
-//    }
-
-//    // When you get an accelermeter change, print it out:
-// 	function listenForAcc() {
-// 		tag.on('accelerometerChange', function(x, y, z) {
-// 	     console.log('\tx = %d G', x.toFixed(1));
-// 	     console.log('\ty = %d G', y.toFixed(1));
-// 	     console.log('\tz = %d G', z.toFixed(1));
-// 	   });
-// 	}
-
-// 	// when you get a button change, print it out:
-// 	function listenForButton() {
-// 		tag.on('simpleKeyChange', function(left, right) {
-// 			if (left) {
-// 				console.log('left: ' + left);
-// 				io.sockets.emit('left', 'left');
-// 			}
-// 			if (right) {
-// 				console.log('right: ' + right);
-// 				io.sockets.emit('right', 'right');
-// 			}
-// 			// if both buttons are pressed, disconnect:
-// 			// if (left && right) {
-// 			// 	tag.disconnect();
-// 			// }
-// 	   });
-// 	}
-
-// 	// Now that you've defined all the functions, start the process:
-// 	connectAndSetUpMe();
-// });
 

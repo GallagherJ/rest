@@ -22,22 +22,8 @@ socket.on('peripheral', function(data) {
 		return;
 	}
 
-	// socket.on('left', function(data) {
 
-	// if (typeof data.name ===  undefined ||
-	// 	typeof data.name ===  'undefined') {
-	// 	console.log('left');
-	// 	return;
-	// }
 
-	// socket.on('right', function(data) {
-
-	// if (typeof data.name ===  undefined ||
-	// 	typeof data.name ===  'undefined') {
-	// 	console.log('right');
-	// 	return;
-
-	// }
 
     
 	document.getElementById('found').innerHTML ="Your Word is here!!";
@@ -52,17 +38,7 @@ socket.on('peripheral', function(data) {
 
 
 
-    //random text
-var words = ["A", "P", "P", "L", "E"];
 
-var getRandomWord = function () {
-    i = Math.floor(Math.random() * words.length);
-    return words[i];
-};
-
-var word = getRandomWord();
-
-console.log(word);
 
     // Taking only Sensor Tag
     if(newPeripheral && data.name == "SensorTag"){
@@ -71,7 +47,7 @@ console.log(word);
 	Pdiv.className= 'peripheralDiv btn';
 	Pdiv.setAttribute('id', data.uuid);
 	var Pname = document.createElement('p');
-	Pname.innerHTML = word//data.name+'<br/><span> UUID: '+data.uuid+'</span>'+ word;
+	// Pname.innerHTML = word//data.name+'<br/><span> UUID: '+data.uuid+'</span>'+ word;
     console.log(data);
 
 
@@ -82,9 +58,9 @@ console.log(word);
 
 
 	//attach event listener to the peripheral divs
-	Pdiv.addEventListener("click", explore);
-	Pdiv.appendChild(Pname);
-	document.getElementById('peripherals').appendChild(Pdiv);
+	// Pdiv.addEventListener("click", explore);
+	// Pdiv.appendChild(Pname);
+	// document.getElementById('peripherals').appendChild(Pdiv);
 	
     data["connected"] = false;
 
@@ -92,6 +68,7 @@ console.log(word);
 	peripheralsList.push(data);
     }
 });
+
 
 
 
@@ -113,28 +90,145 @@ socket.on('disconnectedPeripheral', function(data){
  });
 
 socket.on('dataLogged', function(data){
-
-	document.getElementById('explore').innerHTML = data;
-        console.log(data);
-
-
+	document.getElementById('explore').innerHTML = word;
+        console.log(word);
  });
 
-socket.on('left', function(data){
-
-	document.getElementById('explore').innerHTML = data;
-        console.log(data);
 
 
+
+
+
+
+
+
+
+
+var words = ["A", "B", "C", "D", "E"];
+
+function getRandomWord() {
+    i =words.splice(Math.random()*words.length,1)[0];
+    return i;
+    
+};
+
+var words2 = ["S", "T", "U", "V", "W"];
+
+function getRandomWord2() {
+    i =words2.splice(Math.random()*words.length,1)[0];
+    return i;
+
+};
+
+
+
+var a = 'true';
+var b = 'true';
+var c = 'true';
+var d = 'true';
+var e = 'true';
+var f = 'true';
+var g = 'true';
+var h = 'true';
+
+var j = 'true';
+var k = 'true';
+
+
+
+socket.on('left1', function(data){
+    if(a == 'true'){
+    document.getElementById('left').innerHTML = 
+    document.getElementById('left').innerHTML + "<div id=newWord>" + getRandomWord() + "</div>";
+    console.log(data);
+
+    a = 'false';
+} 
+});
+
+socket.on('left2', function(data){
+    if(b == 'true'){
+    document.getElementById('left').innerHTML = 
+    document.getElementById('left').innerHTML + "<div id=newWord>" + getRandomWord() + "</div>";        
+    console.log(data);
+
+    b = 'false';
+}
  });
 
-socket.on('right', function(data){
-
-	document.getElementById('explore').innerHTML = data;
-        console.log(data);
-
-
+socket.on('left3', function(data){
+    if(c == 'true'){
+    document.getElementById('left').innerHTML = 
+    document.getElementById('left').innerHTML + "<div id=newWord>" + getRandomWord() + "</div>";
+    console.log(data);
+    c = 'false';
+}
  });
+
+socket.on('left4', function(data){
+    if(d == 'true'){
+    document.getElementById('left').innerHTML = 
+    document.getElementById('left').innerHTML + "<div id=newWord>" + getRandomWord() + "</div>";        
+    console.log(data);
+    d = 'false';
+}
+ });
+
+socket.on('left5', function(data){
+    if(e == 'true'){
+    document.getElementById('left').innerHTML = 
+    document.getElementById('left').innerHTML + "<div id=newWord>" + getRandomWord() + "</div>";        
+    console.log(data);
+    e = 'false';
+}
+ });
+
+socket.on('right1', function(data){
+    if(f == 'true'){
+    document.getElementById('right').innerHTML = 
+    document.getElementById('right').innerHTML + "<div id=newWord2>" + getRandomWord2() + "</div>";
+    console.log(data);
+    f = 'false';
+}
+ });
+
+socket.on('right2', function(data){
+    if(g == 'true'){
+    document.getElementById('right').innerHTML = 
+    document.getElementById('right').innerHTML + "<div id=newWord2>" + getRandomWord2() + "</div>";        
+    console.log(data);
+    g = 'false';
+}
+ });
+
+socket.on('right3', function(data){
+    if(h == 'true'){
+    document.getElementById('right').innerHTML = 
+    document.getElementById('right').innerHTML + "<div id=newWord2>" + getRandomWord2() + "</div>";        
+    console.log(data);
+    h = 'false';
+} 
+});
+
+socket.on('right4', function(data){
+    if(k == 'true'){
+    document.getElementById('right').innerHTML = 
+    document.getElementById('right').innerHTML + "<div id=newWord2>" + getRandomWord2() + "</div>";        
+    console.log(data);
+    k = 'false';
+}  
+
+});
+
+socket.on('right5', function(data){
+    if(j == 'true'){
+    document.getElementById('right').innerHTML = 
+    document.getElementById('right').innerHTML + "<div id=newWord2>" + getRandomWord2() + "</div>";        
+    console.log(data);
+    j = 'false';
+} 
+});
+
 
 
 function explore(){
